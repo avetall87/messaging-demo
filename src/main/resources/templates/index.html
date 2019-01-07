@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Демо старница</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div style="padding-bottom: 20px" action="">
+    <input id="message" class="form-control-file" type="text" width="150" height="100">
+    <br>
+    <button onclick="send()" type="button" class="btn btn-success">Отправить в очередь</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    function send() {
+        var data = $("#message").val();
+
+        if (data.length !== 0) {
+            $.ajax({
+                url: "./metric",
+                type: "get",
+                data: "message="+data,
+                success: function(response) {
+                    $("#message").val("")
+                    alert("Сооющение успешно отправлено !")
+                },
+                error: function(xhr) {
+                    alert("Ошибка: "+toString(xhr))
+                }
+            });
+        } else {
+            alert("Введите сообщение !")
+            $('#message').focus();
+        }
+
+    }
+</script>
+
+</body>
+</html>
